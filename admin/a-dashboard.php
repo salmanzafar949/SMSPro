@@ -87,15 +87,16 @@ if(!isset($_SESSION['adminmail']))
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <?php
+    <?php
            $sql = "SELECT * FROM `students`";
            $res = mysqli_query($conn, $sql);
            if($res && mysqli_num_rows($res) >0 )
            {
              while($row = mysqli_fetch_assoc($res))
              {
-               ?>
+    ?>
+      <tr>
+       
       <td><?php echo $row['date'] ?></td>
       <td><?php
                $id   = $row['school']; 
@@ -122,11 +123,12 @@ if(!isset($_SESSION['adminmail']))
           <a class="btn btn-primary" href="#">Edit</a>
           <a class="btn btn-danger" href="#">Delete</a>
           <a class="btn btn-success" href="#">View</a></td>
+          </tr>
       <?php 
            }
          }
       ?>
-      </tr>
+      
         </tbody>
       </table> 
        <button type="submit" class="bnt btn-info pull-right btn-lg">Download</button>
