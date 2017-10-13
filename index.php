@@ -1081,8 +1081,8 @@ include 'db.php';
        <div class="col-lg-10">
          <select class="form-control" name="res" id="select" required="">
           <option value="">Selectone</option>
-           <option value="Recomended"> Recomended </option>
-           <option value="Not Recomended"> Not Recomended </option>
+           <option value="Recomended">Recomended</option>
+           <option value="NotRecomended">Not Recomended</option>
          </select>
        </div>
 
