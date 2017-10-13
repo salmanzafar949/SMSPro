@@ -16,14 +16,14 @@ session_start();
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">SMS</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
+        <li class="active"><a href="index.php">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="school-login.php">School login</a></li>
+        <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
@@ -34,7 +34,7 @@ session_start();
             <li class="divider"></li>
             <li><a href="#">One more separated link</a></li>
           </ul>
-        </li>
+        </li> -->
       </ul>
       <form class="navbar-form navbar-right" action="admin/adminres.php" method="post">
         <div class="form-group">
@@ -65,12 +65,12 @@ else
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">SMS</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="../index.php">Home <span class="sr-only">(current)</span></a></li>
         <li><a href="../school-login.php">School-login</a></li>
         <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
