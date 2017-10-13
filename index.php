@@ -20,6 +20,7 @@ include 'db.php';
      <label for="inputBatch" class="col-lg-2 control-label">Professional stream school</label>
      <div class="col-lg-10">
        <select name="school" class="form-control" required="">
+       <option value="">Selectone</option>
       <?php
         $sql = "select id,schoolname from `schools`";
         $res = mysqli_query($conn, $sql);
@@ -78,6 +79,7 @@ include 'db.php';
       <label for="select" class="col-lg-2 control-label">Students Nationality</label>
       <div class="col-lg-10">
         <select class="form-control" id="select" name="S_n" required="">
+        <option value="">Selectone</option>
         <option value="United Arab Emirates">United Arab Emirates</option>
         <option value="Afghanistan">Afghanistan</option>
 <option value="Albania">Albania</option>
@@ -314,6 +316,7 @@ include 'db.php';
       <label for="select" class="col-lg-2 control-label">Mother's Nationality</label>
       <div class="col-lg-10">
         <select class="form-control" id="select" name="M_n" required="">
+        <option value="">Selectone</option>
         <option value="United Arab Emirates">United Arab Emirates</option>
         <option value="Afghanistan">Afghanistan</option>
 <option value="Albania">Albania</option>
@@ -775,6 +778,7 @@ include 'db.php';
       <label for="select" class="col-lg-2 control-label">Father's Nationality</label>
       <div class="col-lg-10">
         <select class="form-control" name="F_n" id="select" required="">
+        <option value="">Selectone</option>
         <option value="United Arab Emirates">United Arab Emirates</option>
         <option value="Afghanistan">Afghanistan</option>
 <option value="Albania">Albania</option>
@@ -1076,7 +1080,7 @@ include 'db.php';
        <label for="select" class="col-lg-2 control-label">Result</label>
        <div class="col-lg-10">
          <select class="form-control" name="res" id="select" required="">
-          <option>Select</option>
+          <option value="">Selectone</option>
            <option value="Recomended"> Recomended </option>
            <option value="Not Recomended"> Not Recomended </option>
          </select>

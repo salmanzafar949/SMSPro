@@ -11,8 +11,9 @@ if(isset($_POST['Add']))
   $Pemail = $_POST['Pemail'];
   $Cemail = $_POST['Cemail'];
   $SSemail = $_POST['SSemail'];
+  $pass    = $_POST['pass'];
 
-  if(!empty($s_name) && !empty($Pemail) && !empty($Cemail) && !empty($SSemail))
+  if(!empty($s_name) && !empty($Pemail) && !empty($Cemail) && !empty($SSemail) && !empty($pass))
   {
           $sql = "SELECT * FROM `schools` WHERE schoolname='$s_name'";
           $res = mysqli_query($conn, $sql);
@@ -35,7 +36,7 @@ if(isset($_POST['Add']))
           }
           else
           {
-          	$sql1 = "INSERT INTO `schools`(schoolname, Pemail, Coordinator, SectorSpecialist) VALUES('$s_name','$Pemail', '$Cemail', '$SSemail')";
+          	$sql1 = "INSERT INTO `schools`(schoolname, Pemail, Coordinator, SectorSpecialist, pass) VALUES('$s_name','$Pemail', '$Cemail', '$SSemail','$pass')";
                       $res = mysqli_query($conn, $sql1);
                       if($res && mysqli_affected_rows($conn) > 0)
                       {

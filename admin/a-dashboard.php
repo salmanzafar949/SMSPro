@@ -23,7 +23,59 @@ if(!isset($_SESSION['adminmail']))
 
   &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
   <a href="#demo" class="btn btn-info btn-lg" data-toggle="collapse">Add Professional School stream</a>
+  
   <div id="demo" class="collapse"> <br>
+    <!-- Button trigger modal -->
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<button type="button" class="btn btn-primary btn-lg" align="center" data-toggle="modal" data-target="#myModal">
+  View Schools
+</button> <br>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">School List</h4>
+      </div>
+      <div class="modal-body">
+      <table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>sr#</th>
+      <th>School Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+   <?php
+    $i =0;
+     $sql = "SELECT * FROM `schools`";
+     $res = mysqli_query($conn, $sql);
+     if($res && mysqli_num_rows($res) > 0)
+     {
+       while($row=mysqli_fetch_assoc($res))
+       {
+         $i++;
+        ?>
+        
+    <tr>
+      <td><?php echo $i; ?></td>
+      <td><?php  echo $row['schoolname']; ?></td>
+      <td><a href="#" class="btn btn-success">Edit</a> <a href="#" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+    <?php
+
+       }
+     }
+   ?>
+    </tbody>
+</table>
+      </div>
+    </div>
+  </div>
+</div> <br>
      <form class="form-horizontal" action="Add-ps.php" method="post">
        <fieldset>
         <div class="form-group">
@@ -48,6 +100,12 @@ if(!isset($_SESSION['adminmail']))
            <label for="inputSectorSpecailist" class="col-lg-2 control-label">Sector Specialist</label>
            <div class="col-lg-10">
              <input type="email" name="SSemail" class="form-control" id="inputPassword" placeholder="Email"  required>
+           </div>
+         </div>
+         <div class="form-group">
+           <label for="inputSectorSpecailist" class="col-lg-2 control-label">School Password</label>
+           <div class="col-lg-10">
+             <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="password"  required>
            </div>
          </div>
          <div class="form-group">
@@ -119,7 +177,11 @@ if(!isset($_SESSION['adminmail']))
       <td><?php echo $row['total'] ?></td>
       <td><?php echo $row['comm'] ?></td>
       <td><?php echo $row['res']; ?></td>
-      <td><select name="batchnumber" class="form-control" required>
+      <td>
+         <form action="../approval.php" method="post">
+         <input type="hidden" value="<?php echo $row['id']?>" name="id">
+         <select name="batchnumber" class="form-control" required>
+          <option value="">selectone</option>
                 <option value="Batch 1">Batch 1</option>
                 <option value="Batch 2">Batch 2</option>
                 <option value="Batch 3">Batch 3</option>
@@ -160,12 +222,20 @@ if(!isset($_SESSION['adminmail']))
                 <option value="Batch 38">Batch 38</option>
                 <option value="Batch 39">Batch 39</option>
                 <option value="Batch 40">Batch 40</option>
-              </select></td>
+              </select>
+              <button class="form-control" name="add-batch">Submit</button>
+              </form>
+              </td>
       <td>
-      <select name="batchnumber" class="form-control" required>
+      <form action="../approval.php" method="post">
+      <input type="hidden" value="<?php echo $row['id']?>" name="id">
+      <select name="status" class="form-control" required>
+      <option value="">Selectone </option>
       <option value="approved">Approved</option>
       <option value="reject">Reject</option>
       </select>
+      <button class="form-control" name="add-status">Submit</button>
+      </form>
       </td>
       <td>
           <a class="btn btn-primary" href="#">Edit</a>
@@ -175,8 +245,13 @@ if(!isset($_SESSION['adminmail']))
       <?php 
            }
          }
+         else
+         {
       ?>
-      
+               <h1 align="center">No Record found</h1>
+       <?php
+        }
+       ?>
         </tbody>
       </table> 
        <button type="submit" name="download" id="download" class="bnt btn-info pull-right btn-lg">Download</button>
@@ -249,14 +324,42 @@ if(!isset($_SESSION['adminmail']))
           <tr>
 
             <th>Professional Stream School</th>
-            <th>Number if Approved Students</th>
+            <th>Number of Approved Students</th>
           </tr>
         </thead>
         <tbody>
+        <?php
+          $school ='';
+          $sql = "SELECT COUNT(*), school FROM `students` WHERE status ='approved' "; 
+          $res = mysqli_query($conn, $sql);
+          if($res && mysqli_num_rows($res)>0)
+          {
+            while($row=mysqli_fetch_assoc($res))
+            {
+               $school = $row['school'];
+              ?>
+            
           <tr>
-            <td>School Name</td>
-            <td>Number of Approved students</td>
+            <td><?php
+                
+                 $schslc = "SELECT schoolname FROM `schools` WHERE id ='$school'";
+                 $resp =mysqli_query($conn, $schslc);
+                 
+                 if($resp && mysqli_num_rows($resp) > 0)
+                 {
+                    $schoolnow = mysqli_fetch_assoc($resp);
+                    echo $schoolnow['schoolname'];
+                 }
+                  
+             ?></td>
+            <td><?php echo $row['COUNT(*)']; ?></td>
           </tr>
+          <?php  
+              
+
+            }
+          }
+        ?>
             </tbody>
           </table> 
     </div>
