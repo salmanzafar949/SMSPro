@@ -24,6 +24,8 @@ if(isset($_POST['saved']))
      $res    = $_POST['res'];
      $date   = date('Y/m/d');
      $type   = "public"; 
+     $batch  = "";
+     $status = "";
 
      if(!empty($school))
      {
@@ -64,8 +66,8 @@ if(isset($_POST['saved']))
         }
         else
         {
-            $sql = "INSERT INTO `students`(school,S_type,sis,fname,dob,S_n,M_n,F_n,Nlsh,C_s,P_name,p_email,p_no,eng,maths,Nvr,total,comm,res,date) VALUES('$school','$S_type','$sis','$fname','$dob','$S_n','$M_n','$F_n','$Nlsh','$C_s','$P_name','$p_email','$p_no',
-            '$eng','$maths','$Nvr','$total','$comm','$res','$date')";
+            $sql = "INSERT INTO `students`(school,S_type,sis,fname,dob,S_n,M_n,F_n,Nlsh,C_s,P_name,p_email,p_no,eng,maths,Nvr,total,comm,res,date,batchno,status) VALUES('$school','$S_type','$sis','$fname','$dob','$S_n','$M_n','$F_n','$Nlsh','$C_s','$P_name','$p_email','$p_no',
+            '$eng','$maths','$Nvr','$total','$comm','$res','$date','$batch','$status')";
             $res = mysqli_query($conn, $sql);
             if($res &&  mysqli_affected_rows($conn) > 0 )
             {

@@ -6,6 +6,8 @@ if(!isset($_SESSION['adminmail']))
 	header('location:../index.php');
 }
 ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/css/tableexport.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/js/tableexport.min.js"></script>
 <div class="container">
    <h2> Admin Dashboard </h2>
    <div class="alert alert-success" id="response" <?php if(@empty($_SESSION['resp']) && !@isset($_SESSION['resp'])) {?> style="display:none" <?php 
@@ -66,7 +68,7 @@ if(!isset($_SESSION['adminmail']))
     &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
     <a href="#viewStudents" class="btn btn-info btn-lg" data-toggle="collapse">View Students</a>
     <div id="viewStudents" class="collapse">
-    <table class="table table-striped table-hover ">
+    <table class="table table-striped table-hover" id="detailtable">
     <thead>
       <tr>
 
@@ -117,8 +119,54 @@ if(!isset($_SESSION['adminmail']))
       <td><?php echo $row['total'] ?></td>
       <td><?php echo $row['comm'] ?></td>
       <td><?php echo $row['res']; ?></td>
-      <td>Batch No</td>
-      <td>Committee Result</td>
+      <td><select name="batchnumber" class="form-control" required>
+                <option value="Batch 1">Batch 1</option>
+                <option value="Batch 2">Batch 2</option>
+                <option value="Batch 3">Batch 3</option>
+                <option value="Batch 4">Batch 4</option>
+                <option value="Batch 5">Batch 5</option>
+                <option value="Batch 6">Batch 6</option>
+                <option value="Batch 7">Batch 7</option>
+                <option value="Batch 8">Batch 8</option>
+                <option value="Batch 9">Batch 9</option>
+                <option value="Batch 10">Batch 10</option>
+                <option value="Batch 11">Batch 11</option>
+                <option value="Batch 12">Batch 12</option>
+                <option value="Batch 13">Batch 13</option>
+                <option value="Batch 14">Batch 14</option>
+                <option value="Batch 15">Batch 15</option>
+                <option value="Batch 16">Batch 16</option>
+                <option value="Batch 17">Batch 17</option>
+                <option value="Batch 18">Batch 18</option>
+                <option value="Batch 19">Batch 19</option>
+                <option value="Batch 20">Batch 20</option>
+                <option value="Batch 21">Batch 21</option>
+                <option value="Batch 22">Batch 22</option>
+                <option value="Batch 23">Batch 23</option>
+                <option value="Batch 24">Batch 24</option>
+                <option value="Batch 25">Batch 25</option>
+                <option value="Batch 26">Batch 26</option>
+                <option value="Batch 27">Batch 27</option>
+                <option value="Batch 28">Batch 28</option>
+                <option value="Batch 29">Batch 29</option>
+                <option value="Batch 30">Batch 30</option>
+                <option value="Batch 31">Batch 31</option>
+                <option value="Batch 32">Batch 32</option>
+                <option value="Batch 33">Batch 33</option>
+                <option value="Batch 34">Batch 34</option>
+                <option value="Batch 35">Batch 35</option>
+                <option value="Batch 36">Batch 36</option>
+                <option value="Batch 37">Batch 37</option>
+                <option value="Batch 38">Batch 38</option>
+                <option value="Batch 39">Batch 39</option>
+                <option value="Batch 40">Batch 40</option>
+              </select></td>
+      <td>
+      <select name="batchnumber" class="form-control" required>
+      <option value="approved">Approved</option>
+      <option value="reject">Reject</option>
+      </select>
+      </td>
       <td>
           <a class="btn btn-primary" href="#">Edit</a>
           <a class="btn btn-danger" href="#">Delete</a>
@@ -131,7 +179,7 @@ if(!isset($_SESSION['adminmail']))
       
         </tbody>
       </table> 
-       <button type="submit" class="bnt btn-info pull-right btn-lg">Download</button>
+       <button type="submit" name="download" id="download" class="bnt btn-info pull-right btn-lg">Download</button>
 
     </div>
      &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<a href="#SendBatches" class="btn btn-info btn-lg" data-toggle="collapse">Send Batches</a>
@@ -142,8 +190,46 @@ if(!isset($_SESSION['adminmail']))
             <label for="inputBatch" class="col-lg-2 control-label">Batch Number</label>
             <div class="col-lg-10">
               <select name="batchnumber" class="form-control" required>
-                <option value="">1</option>
-                <option value="">1</option>
+                <option value="Batch 1">Batch 1</option>
+                <option value="Batch 2">Batch 2</option>
+                <option value="Batch 3">Batch 3</option>
+                <option value="Batch 4">Batch 4</option>
+                <option value="Batch 5">Batch 5</option>
+                <option value="Batch 6">Batch 6</option>
+                <option value="Batch 7">Batch 7</option>
+                <option value="Batch 8">Batch 8</option>
+                <option value="Batch 9">Batch 9</option>
+                <option value="Batch 10">Batch 10</option>
+                <option value="Batch 11">Batch 11</option>
+                <option value="Batch 12">Batch 12</option>
+                <option value="Batch 13">Batch 13</option>
+                <option value="Batch 14">Batch 14</option>
+                <option value="Batch 15">Batch 15</option>
+                <option value="Batch 16">Batch 16</option>
+                <option value="Batch 17">Batch 17</option>
+                <option value="Batch 18">Batch 18</option>
+                <option value="Batch 19">Batch 19</option>
+                <option value="Batch 20">Batch 20</option>
+                <option value="Batch 21">Batch 21</option>
+                <option value="Batch 22">Batch 22</option>
+                <option value="Batch 23">Batch 23</option>
+                <option value="Batch 24">Batch 24</option>
+                <option value="Batch 25">Batch 25</option>
+                <option value="Batch 26">Batch 26</option>
+                <option value="Batch 27">Batch 27</option>
+                <option value="Batch 28">Batch 28</option>
+                <option value="Batch 29">Batch 29</option>
+                <option value="Batch 30">Batch 30</option>
+                <option value="Batch 31">Batch 31</option>
+                <option value="Batch 32">Batch 32</option>
+                <option value="Batch 33">Batch 33</option>
+                <option value="Batch 34">Batch 34</option>
+                <option value="Batch 35">Batch 35</option>
+                <option value="Batch 36">Batch 36</option>
+                <option value="Batch 37">Batch 37</option>
+                <option value="Batch 38">Batch 38</option>
+                <option value="Batch 39">Batch 39</option>
+                <option value="Batch 40">Batch 40</option>
               </select>
             </div>
            </div>
@@ -231,3 +317,11 @@ if(!isset($_SESSION['adminmail']))
     </tr> -->
   <!-- </tbody>
 </table>  -->
+
+<script>
+ $(document).on('click', '#download', function(event){
+
+  $("#detailtable").tableExport();
+
+ });
+</script>
