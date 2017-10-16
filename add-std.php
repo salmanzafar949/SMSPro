@@ -3,6 +3,7 @@ include 'db.php';
 include 'header.php';
 if(isset($_POST['saved']))
 {
+     
      $school = $_POST['school'];
      $S_type = $_POST['S_type'];
      $sis    = $_POST['sis'];

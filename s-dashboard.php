@@ -61,8 +61,8 @@
   <td><?php echo $row['total'] ?></td>
   <td><?php echo $row['comm'] ?></td>
   <td><?php echo $row['res']; ?></td>
-  <td><?php echo $row['batchno'] ?></td>
-  <td><?php echo $row['status'] ?></td>
+  <td><?php if(!empty($row['batchno'])){echo $row['batchno'];} else{ echo "Pending"; } ?></td>
+  <td><?php if(!empty($row['status'])){echo $row['status'];} else{ echo "Pending"; } ?></td>
       </tr>
   <?php 
        }
@@ -76,15 +76,31 @@
    ?>
     </tbody>
   </table> 
-   <button type="submit" name="download" id="dl" class="bnt btn-info pull-right btn-lg">Download</button>
-
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/css/tableexport.min.css"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/js/tableexport.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
 <script>
- $(document).on('click', '#dl', function(event){
+  $(document).ready(function() {
+      $('#detailtable').DataTable( {
+          dom: 'Bfrtip',
+          buttons: [
+              // 'copy', 'csv', 'excel', 'pdf', 'print'
+              'excel'
+          ]
+      } );
+  } );
 
-  $("#detailtable").tableExport();
-  console.log('hello');
 
- });
+ // $(document).on('click', '#download', function(event){
+
+ //  $("#detailtable").tableExport();
+
+ // });
+</script>

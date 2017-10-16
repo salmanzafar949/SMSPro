@@ -37,7 +37,7 @@ else
     <div class="form-group">
       <label for="inputPassword" class="col-lg-2 control-label">Password</label>
       <div class="col-lg-10">
-        <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password">
+        <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Password" required="">
       </div>
     </div>
     <div class="form-group">

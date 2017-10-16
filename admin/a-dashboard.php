@@ -6,8 +6,8 @@ if(!isset($_SESSION['adminmail']))
 	header('location:../index.php');
 }
 ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/css/tableexport.min.css"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/js/tableexport.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/css/tableexport.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/js/tableexport.min.js"></script> -->
 <div class="container">
    <h2> Admin Dashboard </h2>
    <div class="alert alert-success" id="response" <?php if(@empty($_SESSION['resp']) && !@isset($_SESSION['resp'])) {?> style="display:none" <?php 
@@ -62,7 +62,7 @@ if(!isset($_SESSION['adminmail']))
     <tr>
       <td><?php echo $i; ?></td>
       <td><?php  echo $row['schoolname']; ?></td>
-      <td><a href="#" class="btn btn-success">Edit</a> <a href="#" class="btn btn-danger">Delete</a>
+      <td><a href="edit-school-details.php?id=<?php echo $row['id'] ?>" class="btn btn-success">Edit</a> <a href="delete-school-details.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
       </td>
     </tr>
     <?php
@@ -75,7 +75,8 @@ if(!isset($_SESSION['adminmail']))
       </div>
     </div>
   </div>
-</div> <br>
+</div> 
+<br>
      <form class="form-horizontal" action="Add-ps.php" method="post">
        <fieldset>
         <div class="form-group">
@@ -182,46 +183,46 @@ if(!isset($_SESSION['adminmail']))
          <input type="hidden" value="<?php echo $row['id']?>" name="id">
          <select name="batchnumber" class="form-control" required>
           <option value="">selectone</option>
-                <option value="Batch 1">Batch 1</option>
-                <option value="Batch 2">Batch 2</option>
-                <option value="Batch 3">Batch 3</option>
-                <option value="Batch 4">Batch 4</option>
-                <option value="Batch 5">Batch 5</option>
-                <option value="Batch 6">Batch 6</option>
-                <option value="Batch 7">Batch 7</option>
-                <option value="Batch 8">Batch 8</option>
-                <option value="Batch 9">Batch 9</option>
-                <option value="Batch 10">Batch 10</option>
-                <option value="Batch 11">Batch 11</option>
-                <option value="Batch 12">Batch 12</option>
-                <option value="Batch 13">Batch 13</option>
-                <option value="Batch 14">Batch 14</option>
-                <option value="Batch 15">Batch 15</option>
-                <option value="Batch 16">Batch 16</option>
-                <option value="Batch 17">Batch 17</option>
-                <option value="Batch 18">Batch 18</option>
-                <option value="Batch 19">Batch 19</option>
-                <option value="Batch 20">Batch 20</option>
-                <option value="Batch 21">Batch 21</option>
-                <option value="Batch 22">Batch 22</option>
-                <option value="Batch 23">Batch 23</option>
-                <option value="Batch 24">Batch 24</option>
-                <option value="Batch 25">Batch 25</option>
-                <option value="Batch 26">Batch 26</option>
-                <option value="Batch 27">Batch 27</option>
-                <option value="Batch 28">Batch 28</option>
-                <option value="Batch 29">Batch 29</option>
-                <option value="Batch 30">Batch 30</option>
-                <option value="Batch 31">Batch 31</option>
-                <option value="Batch 32">Batch 32</option>
-                <option value="Batch 33">Batch 33</option>
-                <option value="Batch 34">Batch 34</option>
-                <option value="Batch 35">Batch 35</option>
-                <option value="Batch 36">Batch 36</option>
-                <option value="Batch 37">Batch 37</option>
-                <option value="Batch 38">Batch 38</option>
-                <option value="Batch 39">Batch 39</option>
-                <option value="Batch 40">Batch 40</option>
+                <option value="Batch 1" <?php if($row['batchno']=="Batch 1"){ echo "Selected";} ?>>Batch 1</option>
+                <option value="Batch 2" <?php if($row['batchno']=="Batch 2"){ echo "Selected";} ?>>Batch 2</option>
+                <option value="Batch 3" <?php if($row['batchno']=="Batch 3"){ echo "Selected";} ?>>Batch 3</option>
+                <option value="Batch 4" <?php if($row['batchno']=="Batch 4"){ echo "Selected";} ?>>Batch 4</option>
+                <option value="Batch 5" <?php if($row['batchno']=="Batch 5"){ echo "Selected";} ?>>Batch 5</option>
+                <option value="Batch 6" <?php if($row['batchno']=="Batch 6"){ echo "Selected";} ?>>Batch 6</option>
+                <option value="Batch 7" <?php if($row['batchno']=="Batch 7"){ echo "Selected";} ?>>Batch 7</option>
+                <option value="Batch 8"<?php if($row['batchno']=="Batch 8"){ echo "Selected";} ?>>Batch 8</option>
+                <option value="Batch 9" <?php if($row['batchno']=="Batch 9"){ echo "Selected";} ?>>Batch 9</option>
+                <option value="Batch 10" <?php if($row['batchno']=="Batch 10"){ echo "Selected";} ?>>Batch 10</option>
+                <option value="Batch 11" <?php if($row['batchno']=="Batch 11"){ echo "Selected";} ?>>Batch 11</option>
+                <option value="Batch 12" <?php if($row['batchno']=="Batch 12"){ echo "Selected";} ?>>Batch 12</option>
+                <option value="Batch 13" <?php if($row['batchno']=="Batch 13"){ echo "Selected";} ?>>Batch 13</option>
+                <option value="Batch 14" <?php if($row['batchno']=="Batch 14"){ echo "Selected";} ?>>Batch 14</option>
+                <option value="Batch 15" <?php if($row['batchno']=="Batch 15"){ echo "Selected";} ?>>Batch 15</option>
+                <option value="Batch 16" <?php if($row['batchno']=="Batch 16"){ echo "Selected";} ?>>Batch 16</option>
+                <option value="Batch 17" <?php if($row['batchno']=="Batch 17"){ echo "Selected";} ?>>Batch 17</option>
+                <option value="Batch 18" <?php if($row['batchno']=="Batch 18"){ echo "Selected";} ?>>Batch 18</option>
+                <option value="Batch 19" <?php if($row['batchno']=="Batch 19"){ echo "Selected";} ?>>Batch 19</option>
+                <option value="Batch 20" <?php if($row['batchno']=="Batch 20"){ echo "Selected";} ?>>Batch 20</option>
+                <option value="Batch 21" <?php if($row['batchno']=="Batch 21"){ echo "Selected";} ?>>Batch 21</option>
+                <option value="Batch 22" <?php if($row['batchno']=="Batch 22"){ echo "Selected";} ?>>Batch 22</option>
+                <option value="Batch 23" <?php if($row['batchno']=="Batch 23"){ echo "Selected";} ?>>Batch 23</option>
+                <option value="Batch 24" <?php if($row['batchno']=="Batch 24"){ echo "Selected";} ?>>Batch 24</option>
+                <option value="Batch 25" <?php if($row['batchno']=="Batch 25"){ echo "Selected";} ?>>Batch 25</option>
+                <option value="Batch 26" <?php if($row['batchno']=="Batch 26"){ echo "Selected";} ?>>Batch 26</option>
+                <option value="Batch 27" <?php if($row['batchno']=="Batch 27"){ echo "Selected";} ?>>Batch 27</option>
+                <option value="Batch 28" <?php if($row['batchno']=="Batch 28"){ echo "Selected";} ?>>Batch 28</option>
+                <option value="Batch 29" <?php if($row['batchno']=="Batch 29"){ echo "Selected";} ?>>Batch 29</option>
+                <option value="Batch 30" <?php if($row['batchno']=="Batch 30"){ echo "Selected";} ?>>Batch 30</option>
+                <option value="Batch 31" <?php if($row['batchno']=="Batch 31"){ echo "Selected";} ?>>Batch 31</option>
+                <option value="Batch 32" <?php if($row['batchno']=="Batch 32"){ echo "Selected";} ?>>Batch 32</option>
+                <option value="Batch 33" <?php if($row['batchno']=="Batch 33"){ echo "Selected";} ?>>Batch 33</option>
+                <option value="Batch 34" <?php if($row['batchno']=="Batch 34"){ echo "Selected";} ?>>Batch 34</option>
+                <option value="Batch 35" <?php if($row['batchno']=="Batch 35"){ echo "Selected";} ?>>Batch 35</option>
+                <option value="Batch 36" <?php if($row['batchno']=="Batch 36"){ echo "Selected";} ?>>Batch 36</option>
+                <option value="Batch 37" <?php if($row['batchno']=="Batch 37"){ echo "Selected";} ?>>Batch 37</option>
+                <option value="Batch 38" <?php if($row['batchno']=="Batch 38"){ echo "Selected";} ?>>Batch 38</option>
+                <option value="Batch 39" <?php if($row['batchno']=="Batch 39"){ echo "Selected";} ?>>Batch 39</option>
+                <option value="Batch 40" <?php if($row['batchno']=="Batch 40"){ echo "Selected";} ?>>Batch 40</option>
               </select>
               <button class="form-control" name="add-batch">Submit</button>
               </form>
@@ -231,16 +232,16 @@ if(!isset($_SESSION['adminmail']))
       <input type="hidden" value="<?php echo $row['id']?>" name="id">
       <select name="status" class="form-control" required>
       <option value="">Selectone </option>
-      <option value="approved">Approved</option>
-      <option value="reject">Reject</option>
+      <option value="approved" <?php if($row['status']=="approved"){ echo "Selected";} ?>>Approved</option>
+      <option value="reject" <?php if($row['status']=="reject"){ echo "Selected";} ?>>Reject</option>
       </select>
       <button class="form-control" name="add-status">Submit</button>
       </form>
       </td>
       <td>
-          <a class="btn btn-primary" href="#">Edit</a>
-          <a class="btn btn-danger" href="#">Delete</a>
-          <a class="btn btn-success" href="#">View</a></td>
+          <a class="btn btn-primary" href="edit-student.php?id=<?php echo $row['id'];?>">Edit</a>
+          <a class="btn btn-danger" href="delete-student.php?id=<?php echo $row['id']; ?>">Delete</a>
+          <a class="btn btn-success" href="view-details-of-student.php?id=<?php echo $row['id']; ?>">View</a></td>
           </tr>
       <?php 
            }
@@ -254,8 +255,6 @@ if(!isset($_SESSION['adminmail']))
        ?>
         </tbody>
       </table> 
-       <button type="submit" name="download" id="download" class="bnt btn-info pull-right btn-lg">Download</button>
-
     </div>
      &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<a href="#SendBatches" class="btn btn-info btn-lg" data-toggle="collapse">Send Batches</a>
     <div id="SendBatches" class="collapse">
@@ -265,6 +264,7 @@ if(!isset($_SESSION['adminmail']))
             <label for="inputBatch" class="col-lg-2 control-label">Batch Number</label>
             <div class="col-lg-10">
               <select name="batchnumber" class="form-control" required>
+                 <option value="">selectOne</option>
                 <option value="Batch 1">Batch 1</option>
                 <option value="Batch 2">Batch 2</option>
                 <option value="Batch 3">Batch 3</option>
@@ -420,11 +420,31 @@ if(!isset($_SESSION['adminmail']))
     </tr> -->
   <!-- </tbody>
 </table>  -->
-
+<script src="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
 <script>
- $(document).on('click', '#download', function(event){
+  $(document).ready(function() {
+      $('#detailtable').DataTable( {
+          dom: 'Bfrtip',
+          buttons: [
+              // 'copy', 'csv', 'excel', 'pdf', 'print'
+              'excel'
+          ]
+      } );
+  } );
 
-  $("#detailtable").tableExport();
 
- });
+ // $(document).on('click', '#download', function(event){
+
+ //  $("#detailtable").tableExport();
+
+ // });
 </script>

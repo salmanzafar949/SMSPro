@@ -1,22 +1,45 @@
 <?php
-include 'header.php';
-include 'db.php';
+ 
+ include '../header.php';
+ include '../db.php';
+ if(!isset($_SESSION['adminmail']))
+ {
+   header('location:a-dashboard.php');
+ }
+
+ if(isset($_GET['id']))
+   {
+         $id = $_GET['id'];
+         if(!empty($id))
+         {
+            $get = "SELECT * FROM `students` WHERE id='$id'";
+            $res = mysqli_query($conn, $get);
+            if($res && mysqli_num_rows($res) > 0)
+            {
+                 $stdata= mysqli_fetch_assoc($res);
+            }
+            else
+            {
+                $_SESSION['resp']="No Record Found..student not exist";
+               header('location:a-dashboard.php');
+            }
+         }
+         else
+         {
+          header('location:a-dashboard.php');
+         }
+   }
+   else
+   {
+    header('location:a-dashboard.php');
+   }
+
 ?>
-<div class="container" <?php if(!@isset($_SESSION['succ'])){ ?> style="display:none" <?php } ?>>
-  <div class="row">
-    <div class="col-lg-5 col-lg-offset-5">
-      <h2 class="alert alert-success" >
-        <?php
-           print_r($_SESSION['succ']);
-        ?>
-      </h2>
-    </div>
-  </div>
-</div>
-<form class="form-horizontal" action="add-std.php" method="post">
+<form class="form-horizontal" action="update-std.php" method="post">
   <fieldset>
     <legend>Public Form</legend>
     <div class="form-group">
+      <input type="hidden" name="id" value="<?php echo $stdata['id']; ?>">
      <label for="inputBatch" class="col-lg-2 control-label">Professional stream school</label>
      <div class="col-lg-10">
        <select name="school" class="form-control" required="">
@@ -30,7 +53,7 @@ include 'db.php';
             {
                
         ?>
-         <option value="<?php echo $row['id']; ?>"><?php echo $row['schoolname']; ?></option>
+         <option value="<?php echo $row['id'] ?>" <?php if($stdata['school'] == $row['id']){  echo "selected"; }?>><?php echo $row['schoolname']; ?></option>
          <?php
             }
        }
@@ -43,14 +66,14 @@ include 'db.php';
       <div class="col-lg-10">
         <div class="radio">
           <label>
-            <input type="radio" name="S_type" id="public" value="public" required="">
+            <input type="radio" name="S_type" id="public" value="public" <?php if($stdata['S_type']=="public"){ echo "Checked";} ?>  required="">
             Public
           
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="S_type" id="private" value="private" required="">
+            <input type="radio" name="S_type" id="private" value="private" <?php if($stdata['S_type']=="private"){ echo "Checked";} ?>  required="">
             Private
           </label>
         </div>
@@ -59,20 +82,20 @@ include 'db.php';
      <div class="form-group">
       <label class="col-lg-2 control-label">SIS NO</label>
       <div class="col-lg-10">
-      <input type="text" class="form-control" name="sis" placeholder="Your SIS NO">
-      <h6 class="alert alert-danger">Fill if your school type is public</h6>
+      <input type="text" class="form-control" name="sis" value="<?php echo $stdata['sis'] ?>">
+      <h6 class="alert alert-danger">Fill if school type is public</h6>
     </div>
      </div>
      <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label">Students Full Name</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputEmail" name="fname" placeholder="Name" required="">
+        <input type="text" class="form-control" id="inputEmail" name="fname" value="<?php echo $stdata['fname']; ?>" required="">
       </div>
     </div>
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label">Date of Birth</label>
       <div class="col-lg-10">
-        <input type="date" class="form-control" id="inputEmail" name="dob" placeholder="" required="">
+        <input type="date" class="form-control" id="inputEmail" name="dob" value="<?php  echo $stdata['dob']; ?>" required="">
       </div>
     </div>
     <div class="form-group">
@@ -1012,67 +1035,67 @@ include 'db.php';
     <div class="form-group">
       <label for="inputPassword" class="col-lg-2 control-label">Nearest LandMark to Students Home</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputPassword" placeholder="" name="Nlsh" required="">
+        <input type="text" class="form-control" id="inputPassword" value="<?php echo $stdata['Nlsh']; ?>" name="Nlsh" required="">
       </div>
     </div>
       
     <div class="form-group">
       <label for="inputPassword" class="col-lg-2 control-label"> Current School Name</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputPassword" placeholder="" id="Cschoolname" name="C_s" required="">
+        <input type="text" class="form-control" id="inputPassword" value="<?php echo $stdata['C_s'];?>" id="Cschoolname" name="C_s" required="">
       </div>
     </div>
      
     <div class="form-group">
       <label for="inputPassword" class="col-lg-2 control-label"> Parents Name</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="P_name" placeholder="" name="P_name" required="">
+        <input type="text" class="form-control" id="P_name" value="<?php echo $stdata['P_name']; ?>" name="P_name" required="">
       </div>
     </div>
     
     <div class="form-group">
       <label for="inputPassword" class="col-lg-2 control-label"> Parents Email</label>
       <div class="col-lg-10">
-        <input type="email" class="form-control" id="inputPassword" placeholder="" name="p_email" required="">
+        <input type="email" class="form-control" id="inputPassword" value="<?php  echo $stdata['p_email']; ?>" name="p_email" required="">
       </div>
     </div>
     
     <div class="form-group">
       <label for="inputPassword" class="col-lg-2 control-label">parents Mobile</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputPassword" placeholder="" name="p_no">
+        <input type="text" class="form-control" id="inputPassword" value="<?php echo $stdata['p_no']; ?>" name="p_no">
       </div>
     </div>
       <legend>Test Results</legend>
       <div class="form-group">
         <label for="inputPassword" class="col-lg-2 control-label"> English</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputPassword" placeholder="" name="eng" required="">
+          <input type="text" class="form-control" id="inputPassword" value="<?php echo $stdata['eng']; ?>" name="eng" required="">
         </div>
       </div>
       <div class="form-group">
         <label for="inputPassword" class="col-lg-2 control-label">Maths</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputPassword" placeholder="" name="maths" required="">
+          <input type="text" class="form-control" id="inputPassword" value="<?php echo $stdata['maths']; ?>" name="maths" required="">
         </div> 
       </div>
       <div class="form-group">
         <label for="inputPassword" class="col-lg-2 control-label">Non Verbal Reasoning</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputPassword" placeholder="" name="Nvr" required="">
+          <input type="text" class="form-control" id="inputPassword" value="<?php echo $stdata['Nvr']; ?>" name="Nvr" required="">
         </div>
       </div>
       <div class="form-group">
         <label for="inputPassword" class="col-lg-2 control-label">Total</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputPassword" placeholder="" name="total" required="">
+          <input type="text" class="form-control" id="inputPassword" value="<?php echo $stdata['total']; ?>" name="total" required="">
         </div>
       </div>
       
       <div class="form-group">
         <label for="inputPassword" class="col-lg-2 control-label">Comments</label>
         <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputPassword" placeholder="" name="comm" required="">
+          <input type="text" class="form-control" id="inputPassword" value="<?php echo $stdata['comm']; ?>" name="comm" required="">
         </div>
       </div>
 
@@ -1081,11 +1104,68 @@ include 'db.php';
        <div class="col-lg-10">
          <select class="form-control" name="res" id="select" required="">
           <option value="">Selectone</option>
-           <option value="R">Recomended</option>
-           <option value="NR">Not Recomended</option>
+           <option value="R" <?php if ($stdata['res'] =="R"){ echo "Selected"; } ?> >Recomended</option>
+           <option value="NR" <?php if ($stdata['res'] =="NR"){ echo "Selected"; } ?>>Not Recomended</option>
          </select>
        </div>
-
+       <div class="form-group">
+        <label for="inputBatch" class="col-lg-2 control-label">Batch Number</label>
+        <div class="col-lg-10">
+          <select name="batchnumber" class="form-control" required>
+            <option value="">selectOne</option>
+            <option value="Batch 1" <?php if($stdata['batchno']=="Batch 1"){ echo "Selected";} ?>>Batch 1</option>
+            <option value="Batch 2" <?php if($stdata['batchno']=="Batch 2"){ echo "Selected";} ?>>Batch 2</option>
+            <option value="Batch 3" <?php if($stdata['batchno']=="Batch 3"){ echo "Selected";} ?>>Batch 3</option>
+            <option value="Batch 4" <?php if($stdata['batchno']=="Batch 4"){ echo "Selected";} ?>>Batch 4</option>
+            <option value="Batch 5" <?php if($stdata['batchno']=="Batch 5"){ echo "Selected";} ?>>Batch 5</option>
+            <option value="Batch 6" <?php if($stdata['batchno']=="Batch 6"){ echo "Selected";} ?>>Batch 6</option>
+            <option value="Batch 7" <?php if($stdata['batchno']=="Batch 7"){ echo "Selected";} ?>>Batch 7</option>
+            <option value="Batch 8"<?php if($stdata['batchno']=="Batch 8"){ echo "Selected";} ?>>Batch 8</option>
+            <option value="Batch 9" <?php if($stdata['batchno']=="Batch 9"){ echo "Selected";} ?>>Batch 9</option>
+            <option value="Batch 10" <?php if($stdata['batchno']=="Batch 10"){ echo "Selected";} ?>>Batch 10</option>
+            <option value="Batch 11" <?php if($stdata['batchno']=="Batch 11"){ echo "Selected";} ?>>Batch 11</option>
+            <option value="Batch 12" <?php if($stdata['batchno']=="Batch 12"){ echo "Selected";} ?>>Batch 12</option>
+            <option value="Batch 13" <?php if($stdata['batchno']=="Batch 13"){ echo "Selected";} ?>>Batch 13</option>
+            <option value="Batch 14" <?php if($stdata['batchno']=="Batch 14"){ echo "Selected";} ?>>Batch 14</option>
+            <option value="Batch 15" <?php if($stdata['batchno']=="Batch 15"){ echo "Selected";} ?>>Batch 15</option>
+            <option value="Batch 16" <?php if($stdata['batchno']=="Batch 16"){ echo "Selected";} ?>>Batch 16</option>
+            <option value="Batch 17" <?php if($stdata['batchno']=="Batch 17"){ echo "Selected";} ?>>Batch 17</option>
+            <option value="Batch 18" <?php if($stdata['batchno']=="Batch 18"){ echo "Selected";} ?>>Batch 18</option>
+            <option value="Batch 19" <?php if($stdata['batchno']=="Batch 19"){ echo "Selected";} ?>>Batch 19</option>
+            <option value="Batch 20" <?php if($stdata['batchno']=="Batch 20"){ echo "Selected";} ?>>Batch 20</option>
+            <option value="Batch 21" <?php if($stdata['batchno']=="Batch 21"){ echo "Selected";} ?>>Batch 21</option>
+            <option value="Batch 22" <?php if($stdata['batchno']=="Batch 22"){ echo "Selected";} ?>>Batch 22</option>
+            <option value="Batch 23" <?php if($stdata['batchno']=="Batch 23"){ echo "Selected";} ?>>Batch 23</option>
+            <option value="Batch 24" <?php if($stdata['batchno']=="Batch 24"){ echo "Selected";} ?>>Batch 24</option>
+            <option value="Batch 25" <?php if($stdata['batchno']=="Batch 25"){ echo "Selected";} ?>>Batch 25</option>
+            <option value="Batch 26" <?php if($stdata['batchno']=="Batch 26"){ echo "Selected";} ?>>Batch 26</option>
+            <option value="Batch 27" <?php if($stdata['batchno']=="Batch 27"){ echo "Selected";} ?>>Batch 27</option>
+            <option value="Batch 28" <?php if($stdata['batchno']=="Batch 28"){ echo "Selected";} ?>>Batch 28</option>
+            <option value="Batch 29" <?php if($stdata['batchno']=="Batch 29"){ echo "Selected";} ?>>Batch 29</option>
+            <option value="Batch 30" <?php if($stdata['batchno']=="Batch 30"){ echo "Selected";} ?>>Batch 30</option>
+            <option value="Batch 31" <?php if($stdata['batchno']=="Batch 31"){ echo "Selected";} ?>>Batch 31</option>
+            <option value="Batch 32" <?php if($stdata['batchno']=="Batch 32"){ echo "Selected";} ?>>Batch 32</option>
+            <option value="Batch 33" <?php if($stdata['batchno']=="Batch 33"){ echo "Selected";} ?>>Batch 33</option>
+            <option value="Batch 34" <?php if($stdata['batchno']=="Batch 34"){ echo "Selected";} ?>>Batch 34</option>
+            <option value="Batch 35" <?php if($stdata['batchno']=="Batch 35"){ echo "Selected";} ?>>Batch 35</option>
+            <option value="Batch 36" <?php if($stdata['batchno']=="Batch 36"){ echo "Selected";} ?>>Batch 36</option>
+            <option value="Batch 37" <?php if($stdata['batchno']=="Batch 37"){ echo "Selected";} ?>>Batch 37</option>
+            <option value="Batch 38" <?php if($stdata['batchno']=="Batch 38"){ echo "Selected";} ?>>Batch 38</option>
+            <option value="Batch 39" <?php if($stdata['batchno']=="Batch 39"){ echo "Selected";} ?>>Batch 39</option>
+            <option value="Batch 40" <?php if($stdata['batchno']=="Batch 40"){ echo "Selected";} ?>>Batch 40</option>
+          </select>
+        </div>
+       </div>
+       <div class="form-group">
+        <label for="inputBatch" class="col-lg-2 control-label">Committee Result</label>
+        <div class="col-lg-10">
+        <select name="status" class="form-control" required>
+        <option value="">Selectone </option>
+        <option value="approved" <?php if($stdata['status']=="approved"){ echo "Selected";} ?> >Approved</option>
+        <option value="reject" <?php if($stdata['status']=="reject"){ echo "Selected";} ?>>Reject</option>
+        </select>
+       </div>
+     </div>
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <button type="reset" class="btn btn-default">Cancel</button>
@@ -1094,43 +1174,3 @@ include 'db.php';
     </div>
   </fieldset>
 </form>
-<!-- <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
- -->
-<script>
-// $(document).ready(function(){
-//      $("#Cschoolname").keyup(function(){
-          
-//           var query = $(this).val();
-//           if(query !='')
-//           {
-//             $.ajax({
-
-//                url:"search.php",
-//                method:"POST",
-//                data:{query:query},
-//                success:function(data)
-//                {
-//                   $('#schoollist').fadeIn();
-//                   $('#schoollist').html(data);
-//                }
-
-//             });
-//           }
-//      });
-// });
-
-
-
-// $(function() {
-//     $( "#Cschoolname" ).autocomplete({
-//       source: 'search.php'
-//     });
-//   });
-// $(function() 
-// {
-//  $( "#coding_language" ).autocomplete({
-//   source: 'search.php'
-//  });
-// });
-</script>
