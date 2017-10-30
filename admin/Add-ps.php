@@ -12,6 +12,7 @@ if(isset($_POST['Add']))
   $Cemail = $_POST['Cemail'];
   $SSemail = $_POST['SSemail'];
   $pass    = $_POST['pass'];
+  $emails = explode(';', $_GET['emails']);
 
   if(!empty($s_name) && !empty($Pemail) && !empty($Cemail) && !empty($SSemail) && !empty($pass))
   {

@@ -49,7 +49,7 @@ if(isset($_POST['saved']))
                     $res = mysqli_query($conn, $sql);
                     if($res &&  mysqli_affected_rows($conn) > 0 )
                     {
-                             $_SESSION['succ']="You Application has been submited successfully";
+                             $_SESSION['succ']="You Application has been submitted successfully";
                              header('location:index.php');
                     }
                     else

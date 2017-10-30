@@ -115,10 +115,10 @@ if(!isset($_SESSION['adminmail']))
              <button type="submit" name="Add" class="btn btn-primary">Save</button>
            </div>
          </div> <br>
-         <div class="form-group">
+         <div class="form-group" id="emls">
            <label for="inputSectorSpecailist" class="col-lg-2 control-label">CC</label>
            <div class="col-lg-10">
-             <input type="email" name="emails" class="form-control" id="inputPassword" placeholder="Email"  required>
+             <input type="email" name="emails" id="emails" multiple class="form-control" id="inputPassword" placeholder="Email"  required>
            </div>
          </div>
        </fieldset>
@@ -420,6 +420,7 @@ if(!isset($_SESSION['adminmail']))
     </tr> -->
   <!-- </tbody>
 </table>  -->
+<script src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script>
 <script src="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
@@ -430,6 +431,13 @@ if(!isset($_SESSION['adminmail']))
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.4.2/js/buttons.print.min.js"></script>
+
+<script>
+// function myFunction() {
+//     var x = document.getElementById("emails").multiple;
+    // document.getElementById("emls").innerHTML = x;
+}
+</script>
 <script>
   $(document).ready(function() {
       $('#detailtable').DataTable( {
